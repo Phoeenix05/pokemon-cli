@@ -1,25 +1,27 @@
 mod pokeapi;
 
 use clap::Parser;
-use pokeapi::get::get_by_name;
+use pokeapi::get::get_pokemon;
 
 #[derive(Parser, Debug)]
 #[command(version)]
 struct Args {
-    #[arg(long)]
+    #[arg(short, long)]
     random: bool,
 
-    #[arg(short, long)]
-    name: Option<String>,
+    #[arg(long)]
+    id: Option<String>,
 }
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error> {
     let args = Args::parse();
 
-    if args.name != None {
-        let pokemon = get_by_name(args.name.unwrap()).await;
-        println!("{:#?}", pokemon)
+    if args.id != None {
+        match get_pokemon(args.id.unwrap()).await {
+            Ok(res) => println!("{:#?}", res),
+            Err(err) => eprintln!("\x1b[1;31m[ERROR]\x1b[0m An error occurred \n{}", err),
+        }
     }
 
     Ok(())

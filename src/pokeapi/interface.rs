@@ -1,227 +1,228 @@
-use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct PokeapiRes {
-    pub abilities: Vec<Ability>,
-    pub base_experience: i64,
-    pub forms: Vec<Species>,
-    pub game_indices: Vec<GameIndex>,
-    pub height: i64,
-    pub held_items: Vec<HeldItem>,
-    pub id: i64,
-    pub is_default: bool,
-    pub location_area_encounters: String,
-    pub moves: Vec<Move>,
-    pub name: String,
-    pub order: i64,
-    pub past_types: Vec<Option<serde_json::Value>>,
-    pub species: Species,
-    pub sprites: Box<Sprites>,
-    pub stats: Vec<Stat>,
-    pub types: Vec<Type>,
-    pub weight: i64,
+    pub abilities: Option<Vec<Ability>>,
+    pub base_experience: Option<i64>,
+    pub forms: Option<Vec<Species>>,
+    pub game_indices: Option<Vec<GameIndex>>,
+    pub height: Option<i64>,
+    pub held_items: Option<Vec<HeldItem>>,
+    pub id: Option<i64>,
+    pub is_default: Option<bool>,
+    pub location_area_encounters: Option<String>,
+    pub moves: Option<Vec<Move>>,
+    pub name: Option<String>,
+    pub order: Option<i64>,
+    pub past_types: Option<Vec<Option<serde_json::Value>>>,
+    pub species: Option<Species>,
+    pub sprites: Option<Box<Sprites>>,
+    pub stats: Option<Vec<Stat>>,
+    pub types: Option<Vec<Type>>,
+    pub weight: Option<i64>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Ability {
-    pub ability: Species,
-    pub is_hidden: bool,
-    pub slot: i64,
+    pub ability: Option<Species>,
+    pub is_hidden: Option<bool>,
+    pub slot: Option<i64>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Species {
-    pub name: String,
-    pub url: String,
+    pub name: Option<String>,
+    pub url: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GameIndex {
-    pub game_index: i64,
-    pub version: Species,
+    pub game_index: Option<i64>,
+    pub version: Option<Species>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct HeldItem {
-    pub item: Species,
-    pub version_details: Vec<VersionDetail>,
+    pub item: Option<Species>,
+    pub version_details: Option<Vec<VersionDetail>>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct VersionDetail {
-    pub rarity: i64,
-    pub version: Species,
+    pub rarity: Option<i64>,
+    pub version: Option<Species>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Move {
     #[serde(rename = "move")]
-    pub move_move: Species,
-    pub version_group_details: Vec<VersionGroupDetail>,
+    pub move_move: Option<Species>,
+    pub version_group_details: Option<Vec<VersionGroupDetail>>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct VersionGroupDetail {
-    pub level_learned_at: i64,
-    pub move_learn_method: Species,
-    pub version_group: Species,
+    pub level_learned_at: Option<i64>,
+    pub move_learn_method: Option<Species>,
+    pub version_group: Option<Species>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GenerationV {
     #[serde(rename = "black-white")]
-    pub black_white: Box<Sprites>,
+    pub black_white: Option<Box<Sprites>>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GenerationIv {
     #[serde(rename = "diamond-pearl")]
-    pub diamond_pearl: Box<Sprites>,
+    pub diamond_pearl: Option<Box<Sprites>>,
     #[serde(rename = "heartgold-soulsilver")]
-    pub heartgold_soulsilver: Box<Sprites>,
-    pub platinum: Box<Sprites>,
+    pub heartgold_soulsilver: Option<Box<Sprites>>,
+    pub platinum: Option<Box<Sprites>>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Versions {
     #[serde(rename = "generation-i")]
-    pub generation_i: GenerationI,
+    pub generation_i: Option<GenerationI>,
     #[serde(rename = "generation-ii")]
-    pub generation_ii: GenerationIi,
+    pub generation_ii: Option<GenerationIi>,
     #[serde(rename = "generation-iii")]
-    pub generation_iii: GenerationIii,
+    pub generation_iii: Option<GenerationIii>,
     #[serde(rename = "generation-iv")]
-    pub generation_iv: GenerationIv,
+    pub generation_iv: Option<GenerationIv>,
     #[serde(rename = "generation-v")]
-    pub generation_v: GenerationV,
+    pub generation_v: Option<GenerationV>,
     #[serde(rename = "generation-vi")]
-    pub generation_vi: HashMap<String, Home>,
+    pub generation_vi: Option<HashMap<String, Home>>,
     #[serde(rename = "generation-vii")]
-    pub generation_vii: GenerationVii,
+    pub generation_vii: Option<GenerationVii>,
     #[serde(rename = "generation-viii")]
-    pub generation_viii: GenerationViii,
+    pub generation_viii: Option<GenerationViii>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Sprites {
-    pub back_default: String,
-    pub back_female: Option<serde_json::Value>,
-    pub back_shiny: String,
-    pub back_shiny_female: Option<serde_json::Value>,
-    pub front_default: String,
-    pub front_female: Option<serde_json::Value>,
-    pub front_shiny: String,
-    pub front_shiny_female: Option<serde_json::Value>,
-    pub other: Option<Other>,
-    pub versions: Option<Versions>,
-    pub animated: Option<Box<Sprites>>,
+    pub back_default: Option<String>,
+    pub back_female: Option<Option<serde_json::Value>>,
+    pub back_shiny: Option<String>,
+    pub back_shiny_female: Option<Option<serde_json::Value>>,
+    pub front_default: Option<String>,
+    pub front_female: Option<Option<serde_json::Value>>,
+    pub front_shiny: Option<String>,
+    pub front_shiny_female: Option<Option<serde_json::Value>>,
+    pub other: Option<Option<Other>>,
+    pub versions: Option<Option<Versions>>,
+    pub animated: Option<Option<Box<Sprites>>>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GenerationI {
     #[serde(rename = "red-blue")]
-    pub red_blue: RedBlue,
-    pub yellow: RedBlue,
+    pub red_blue: Option<RedBlue>,
+    pub yellow: Option<RedBlue>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct RedBlue {
-    pub back_default: String,
-    pub back_gray: String,
-    pub back_transparent: String,
-    pub front_default: String,
-    pub front_gray: String,
-    pub front_transparent: String,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct GenerationIi {
-    pub crystal: Crystal,
-    pub gold: Gold,
-    pub silver: Gold,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Crystal {
-    pub back_default: String,
-    pub back_shiny: String,
-    pub back_shiny_transparent: String,
-    pub back_transparent: String,
-    pub front_default: String,
-    pub front_shiny: String,
-    pub front_shiny_transparent: String,
-    pub front_transparent: String,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Gold {
-    pub back_default: String,
-    pub back_shiny: String,
-    pub front_default: String,
-    pub front_shiny: String,
+    pub back_default: Option<String>,
+    pub back_gray: Option<String>,
+    pub back_transparent: Option<String>,
+    pub front_default: Option<String>,
+    pub front_gray: Option<String>,
     pub front_transparent: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+pub struct GenerationIi {
+    pub crystal: Option<Crystal>,
+    pub gold: Option<Gold>,
+    pub silver: Option<Gold>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Crystal {
+    pub back_default: Option<String>,
+    pub back_shiny: Option<String>,
+    pub back_shiny_transparent: Option<String>,
+    pub back_transparent: Option<String>,
+    pub front_default: Option<String>,
+    pub front_shiny: Option<String>,
+    pub front_shiny_transparent: Option<String>,
+    pub front_transparent: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Gold {
+    pub back_default: Option<String>,
+    pub back_shiny: Option<String>,
+    pub front_default: Option<String>,
+    pub front_shiny: Option<String>,
+    pub front_transparent: Option<Option<String>>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
 pub struct GenerationIii {
-    pub emerald: OfficialArtwork,
+    pub emerald: Option<OfficialArtwork>,
     #[serde(rename = "firered-leafgreen")]
-    pub firered_leafgreen: Gold,
+    pub firered_leafgreen: Option<Gold>,
     #[serde(rename = "ruby-sapphire")]
-    pub ruby_sapphire: Gold,
+    pub ruby_sapphire: Option<Gold>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct OfficialArtwork {
-    pub front_default: String,
-    pub front_shiny: String,
+    pub front_default: Option<String>,
+    pub front_shiny: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Home {
-    pub front_default: String,
-    pub front_female: Option<serde_json::Value>,
-    pub front_shiny: String,
-    pub front_shiny_female: Option<serde_json::Value>,
+    pub front_default: Option<String>,
+    pub front_female: Option<Option<serde_json::Value>>,
+    pub front_shiny: Option<String>,
+    pub front_shiny_female: Option<Option<serde_json::Value>>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GenerationVii {
-    pub icons: DreamWorld,
+    pub icons: Option<DreamWorld>,
     #[serde(rename = "ultra-sun-ultra-moon")]
-    pub ultra_sun_ultra_moon: Home,
+    pub ultra_sun_ultra_moon: Option<Home>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct DreamWorld {
-    pub front_default: String,
-    pub front_female: Option<serde_json::Value>,
+    pub front_default: Option<String>,
+    pub front_female: Option<Option<serde_json::Value>>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GenerationViii {
-    pub icons: DreamWorld,
+    pub icons: Option<DreamWorld>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Other {
-    pub dream_world: DreamWorld,
-    pub home: Home,
+    pub dream_world: Option<DreamWorld>,
+    pub home: Option<Home>,
     #[serde(rename = "official-artwork")]
-    pub official_artwork: OfficialArtwork,
+    pub official_artwork: Option<OfficialArtwork>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Stat {
-    pub base_stat: i64,
-    pub effort: i64,
-    pub stat: Species,
+    pub base_stat: Option<i64>,
+    pub effort: Option<i64>,
+    pub stat: Option<Species>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Type {
-    pub slot: i64,
+    pub slot: Option<i64>,
     #[serde(rename = "type")]
-    pub type_type: Species,
+    pub type_type: Option<Species>,
 }
